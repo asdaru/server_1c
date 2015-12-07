@@ -4,7 +4,7 @@ MAINTAINER asdaru
 RUN locale-gen en_US ru_RU ru_RU.UTF-8
 ENV LANG ru_RU.utf8
 
-ENV DIST ./dist
+ENV DIST deb64_82_19_83.tar.gz 
 
 RUN apt-get update && apt-get install -y \
 	nano krb5-user libgssapi-krb5-2 unixodbc libgsf-bin t1utils libmagickwand-dev imagemagick wget
@@ -15,7 +15,9 @@ RUN ln -s /usr/lib/x86_64-linux-gnu/libgssapi_krb5.so.2.2 /usr/lib/libgssapi_krb
 ENV SRV1CV8_DATA /opt/1C/data/
 ENV NH_SERVER_ADDR "168.192.0.9 , 192.168.0.5" 
 
-RUN mkdir /opt/dist && cd /opt/dist/ && wget https://dl.dropboxusercontent.com/u/3197086/deb64_82_19_83.tar.gz /opt && dpkg -i *.deb
+RUN mkdir /opt/dist && cd /opt/dist/ \
+	&& wget https://dl.dropboxusercontent.com/u/3197086/${DIST} \
+	&& tar xzf ${DIST} && dpkg -i *.deb
 RUN mkdir -p /var/log/1c/dumps && chmod -R 777 /var/log/1c
 
 RUN mkdir ${SRV1CV8_DATA}
