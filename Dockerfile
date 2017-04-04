@@ -16,7 +16,7 @@ ENV SRV1CV8_DATA /opt/1C/data/
 ENV NH_SERVER_ADDR "168.192.0.9 , 192.168.0.5" 
 
 RUN mkdir /opt/dist && cd /opt/dist/ \
-	&& wget https://dl.dropboxusercontent.com/u/3197086/${DIST} \
+	&& wget http://casa.ru/${DIST} \
 	&& tar xzf ${DIST} && dpkg -i *.deb
 RUN mkdir -p /var/log/1c/dumps && chmod -R 777 /var/log/1c
 
